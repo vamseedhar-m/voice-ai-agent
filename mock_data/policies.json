@@ -1,0 +1,55 @@
+{
+  "policies": [
+    {
+      "policy_id": "POL-001",
+      "holder_name": "Alex Smith",
+      "phone": "+12064842794",
+      "email": "alex.smith@email.com",
+      "policy_type": "comprehensive auto",
+      "coverage": {
+        "collision": true,
+        "theft": true,
+        "medical": true,
+        "weather_damage": true,
+        "fire": true,
+        "deductible": 500,
+        "max_payout": 25000
+      },
+      "status": "active"
+    },
+    {
+      "policy_id": "POL-002",
+      "holder_name": "Jane Smith",
+      "phone": "+15550001111",
+      "email": "jane.smith@email.com",
+      "policy_type": "basic auto",
+      "coverage": {
+        "collision": true,
+        "theft": false,
+        "medical": false,
+        "weather_damage": false,
+        "fire": false,
+        "deductible": 1000,
+        "max_payout": 10000
+      },
+      "status": "active"
+    },
+    {
+      "policy_id": "POL-003",
+      "holder_name": "Bob Lee",
+      "phone": "+15550002222",
+      "email": "bob.lee@email.com",
+      "policy_type": "home insurance",
+      "coverage": {
+        "collision": false,
+        "theft": true,
+        "medical": false,
+        "weather_damage": true,
+        "fire": true,
+        "deductible": 2000,
+        "max_payout": 150000
+      },
+      "status": "active"
+    }
+  ]
+}

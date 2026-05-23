@@ -29,10 +29,12 @@ from app.models.vapi import VapiMessageType, VapiWebhookPayload
 # ── Skin registry ────────────────────────────────────────────────────────────
 from app.skins import healthbot as _healthbot
 from app.skins import hvacbot as _hvacbot
+from app.skins import claimsbot as _claimsbot
 
 SKINS = {
-    "healthbot": _healthbot,
-    "hvacbot":   _hvacbot,
+    "healthbot":  _healthbot,
+    "hvacbot":    _hvacbot,
+    "claimsbot":  _claimsbot,
 }
 
 ACTIVE_SKIN_NAME = os.getenv("ACTIVE_SKIN", "healthbot")
@@ -300,5 +302,25 @@ def _handle_function_call(fn_name: str, params: dict, caller_phone: str) -> str:
     if fn_name == "check_service_status":
         from app.skins.hvacbot import check_service_status
         return check_service_status(caller_phone)
+
+    # ── ClaimsBot tools ───────────────────────────────────────────────────────
+    if fn_name == "lookup_policy":
+        from app.skins.claimsbot import lookup_policy
+        return lookup_policy(caller_phone)
+
+    if fn_name == "file_claim":
+        from app.skins.claimsbot import file_claim
+        return file_claim(
+            phone=caller_phone,
+            incident_date=params.get("incident_date", ""),
+            incident_type=params.get("incident_type", ""),
+            description=params.get("description", ""),
+            estimated_amount=float(params.get("estimated_amount", 0)),
+            policy_id=params.get("policy_id"),
+        )
+
+    if fn_name == "check_claim_status":
+        from app.skins.claimsbot import check_claim_status
+        return check_claim_status(caller_phone)
 
     return f"Unknown function: {fn_name}"

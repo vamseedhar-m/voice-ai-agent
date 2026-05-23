@@ -1,0 +1,18 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-001",
+      "policy_id": "POL-002",
+      "holder_name": "Jane Smith",
+      "phone": "+15550001111",
+      "incident_date": "2026-05-10",
+      "incident_type": "collision",
+      "description": "Rear-ended at traffic light",
+      "estimated_amount": 3500,
+      "status": "approved",
+      "decision_reason": "Collision covered under policy. Deductible of $1000 applied.",
+      "payout": 2500,
+      "filed_date": "2026-05-11"
+    }
+  ]
+}
