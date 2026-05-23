@@ -2,9 +2,9 @@
   "policies": [
     {
       "policy_id": "POL-001",
-      "holder_name": "Alex Smith",
+      "holder_name": "Jason Lee",
       "phone": "+12064842794",
-      "email": "alex.smith@email.com",
+      "email": "jason.lee@email.com",
       "policy_type": "comprehensive auto",
       "coverage": {
         "collision": true,
