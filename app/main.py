@@ -223,6 +223,16 @@ def _handle_function_call(fn_name: str, params: dict, caller_phone: str) -> str:
     # Normalize all keys to lowercase so "Time" and "time" both work
     params = {k.lower(): v for k, v in params.items()}
 
+    if fn_name == "get_today_date":
+        from datetime import date as _date, timedelta, datetime
+        today = _date.today()
+        days = []
+        for i in range(14):
+            d = today + timedelta(days=i)
+            label = "Today" if i == 0 else d.strftime("%A")
+            days.append(f"{label} = {d.strftime('%Y-%m-%d')} ({d.strftime('%B %d')})")
+        return f"Today is {today.strftime('%A, %B %d, %Y')}. Next 14 days: " + "; ".join(days)
+
     if fn_name == "check_availability":
         from datetime import date as _date, datetime
         slots = cal.get_available_slots(params.get("date"))
