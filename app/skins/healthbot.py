@@ -8,26 +8,46 @@ A "skin" supplies:
   - assistant_config: Vapi assistant definition (returned on assistant-request)
 """
 import json
-from datetime import date
+from datetime import date, timedelta
 from app.models.intent import ClassificationResult
 from app.tools import calendar, crm
 
 
+def _build_date_reference() -> str:
+    """
+    Build a dynamic 14-day date reference so Claude always knows
+    the correct day-to-date mapping without any hardcoded dates.
+    e.g. "Tue=May 26, Wed=May 27, Thu=May 28, Fri=May 29, ..."
+    """
+    today = date.today()
+    entries = []
+    for i in range(14):
+        d = today + timedelta(days=i)
+        label = "Today" if i == 0 else d.strftime("%a")
+        entries.append(f"{label}={d.strftime('%b %d')}")
+    return ", ".join(entries)
+
+
 def _system_context() -> str:
-    """Build system prompt with today's date injected so Claude uses the right year."""
-    today = date.today().strftime("%A, %B %d, %Y")  # e.g. "Friday, May 22, 2026"
+    """Build system prompt with today's date and rolling 14-day calendar injected."""
+    today = date.today().strftime("%A, %B %d, %Y")
+    date_ref = _build_date_reference()
     return (
-        f"Today's date is {today}. "
-        "You are HealthBot, a friendly medical receptionist for Sunrise Family Clinic. "
-        "You help patients schedule appointments, answer questions about their upcoming visits, "
-        "and verify insurance coverage. "
-        "The clinic has exactly two doctors: Dr. John and Dr. Nguyen. "
-        "Never ask which Dr. John — there is only one. "
-        "When a caller wants to book an appointment, always ask for their full name "
-        "if they have not already provided it. Pass their name as patient_name when calling book_appointment. "
-        "When a caller mentions a date without a year, always assume the current year. "
-        "Always be empathetic, HIPAA-aware (never repeat sensitive data aloud unnecessarily), "
-        "and keep responses brief for phone delivery."
+        f"Today is {today}. "
+        f"Date reference for the next 14 days: {date_ref}. "
+        "When a caller says a day name like 'Tuesday' or 'next Friday', "
+        "use this reference to find the exact date — never guess. "
+        "You are Mike, an AI assistant and friendly medical receptionist "
+        "for Sunrise Family Clinic. "
+        "The clinic has two doctors: Dr. John and Dr. Nguyen. "
+        "You have already greeted the caller — never re-introduce yourself "
+        "or say hello again mid-conversation. "
+        "Before booking any appointment, you MUST ask for the caller's full name "
+        "if they have not said it. Do not skip this step. "
+        "Pass the caller's name as patient_name when calling book_appointment. "
+        "Speak naturally and warmly — never use numbered lists or bullet points. "
+        "Keep responses short and conversational, like a real receptionist on the phone. "
+        "Always be empathetic and HIPAA-aware."
     )
 
 
