@@ -224,10 +224,19 @@ def _handle_function_call(fn_name: str, params: dict, caller_phone: str) -> str:
     params = {k.lower(): v for k, v in params.items()}
 
     if fn_name == "check_availability":
+        from datetime import date as _date, datetime
         slots = cal.get_available_slots(params.get("date"))
         if not slots:
             return "No available slots found for that date."
-        return json.dumps(slots[:5])
+        # Add human-readable day name to each slot so Claude never has to calculate it
+        enriched = []
+        for s in slots[:5]:
+            try:
+                day_name = datetime.strptime(s["date"], "%Y-%m-%d").strftime("%A %B %d")
+            except Exception:
+                day_name = s["date"]
+            enriched.append({**s, "day": day_name})
+        return json.dumps(enriched)
 
     if fn_name == "book_appointment":
         patient = crm.get_patient_by_phone(caller_phone)

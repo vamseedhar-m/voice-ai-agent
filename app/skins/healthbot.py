@@ -132,11 +132,11 @@ def assistant_config(webhook_url: str) -> dict:
                  e.g. https://abc123.ngrok.io
     """
     return {
-        "name": "HealthBot",
+        "name": "Mike",
         "model": {
             "provider": "anthropic",
             "model": "claude-sonnet-4-5",
-            "systemPrompt": SYSTEM_CONTEXT,
+            "systemPrompt": _system_context(),  # called fresh on every call — always correct dates
             "temperature": 0.3,
         },
         "voice": {
