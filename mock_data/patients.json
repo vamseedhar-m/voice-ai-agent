@@ -8,7 +8,7 @@
       "insurance_provider": "BlueCross",
       "insurance_id": "BC-88821",
       "insurance_verified": true,
-      "primary_doctor": "Dr. Patel"
+      "primary_doctor": "Dr. John"
     },
     {
       "id": "pat-002",
@@ -19,6 +19,16 @@
       "insurance_id": "AE-44412",
       "insurance_verified": false,
       "primary_doctor": "Dr. Nguyen"
+    },
+    {
+      "id": "pat-003",
+      "name": "Alex Smith",
+      "phone": "+12064842794",
+      "dob": "1987-06-01",
+      "insurance_provider": "BlueCross",
+      "insurance_id": "BC-33087",
+      "insurance_verified": true,
+      "primary_doctor": "Dr. John"
     }
   ]
 }

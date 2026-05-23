@@ -48,9 +48,16 @@ def book_appointment(
     if BACKEND == "mock":
         data = _load_mock()
 
+        # Normalize time format — treat "9:00" and "09:00" as the same
+        def _norm_time(t: str) -> str:
+            parts = t.split(":")
+            return f"{int(parts[0]):02d}:{parts[1]}"
+
+        time = _norm_time(time)
+
         # Verify the slot is still open.
         slot_match = next(
-            (s for s in data["available_slots"] if s["date"] == date and s["time"] == time and s["doctor"] == doctor),
+            (s for s in data["available_slots"] if s["date"] == date and _norm_time(s["time"]) == time and s["doctor"] == doctor),
             None,
         )
         if not slot_match:

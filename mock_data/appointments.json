@@ -4,9 +4,9 @@
       "id": "appt-001",
       "patient_name": "Jane Smith",
       "phone": "+15550001111",
-      "doctor": "Dr. Patel",
+      "doctor": "Dr. Nguyen",
       "service": "Annual physical",
-      "date": "2026-05-28",
+      "date": "2026-05-26",
       "time": "10:00",
       "status": "confirmed"
     },
@@ -16,41 +16,186 @@
       "phone": "+15550002222",
       "doctor": "Dr. Nguyen",
       "service": "Follow-up cardiology",
-      "date": "2026-05-29",
-      "time": "14:30",
+      "date": "2026-05-27",
+      "time": "09:00",
       "status": "confirmed"
     },
     {
-      "id": "appt-a3d35d",
-      "patient_name": "Caller",
-      "phone": "+12064842794",
-      "doctor": "Dr. Patel",
+      "id": "appt-003",
+      "patient_name": "Ron Swanson",
+      "phone": "+12062345678",
+      "doctor": "Dr. John",
       "service": "General visit",
-      "date": "2026-05-27",
+      "date": "2026-06-02",
       "time": "09:00",
       "status": "confirmed"
     }
   ],
   "available_slots": [
     {
+      "date": "2026-05-26",
+      "time": "09:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-05-26",
+      "time": "11:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-05-26",
+      "time": "13:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-26",
+      "time": "14:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-26",
+      "time": "15:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-27",
+      "time": "10:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
       "date": "2026-05-27",
       "time": "11:00",
       "doctor": "Dr. Nguyen"
     },
     {
-      "date": "2026-05-28",
-      "time": "15:00",
-      "doctor": "Dr. Patel"
+      "date": "2026-05-27",
+      "time": "13:00",
+      "doctor": "Dr. John"
     },
     {
-      "date": "2026-05-29",
-      "time": "09:30",
+      "date": "2026-05-27",
+      "time": "14:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-27",
+      "time": "15:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-28",
+      "time": "09:00",
       "doctor": "Dr. Nguyen"
     },
     {
-      "date": "2026-05-30",
+      "date": "2026-05-28",
       "time": "10:00",
-      "doctor": "Dr. Patel"
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-05-28",
+      "time": "11:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-05-28",
+      "time": "13:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-28",
+      "time": "14:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-28",
+      "time": "15:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-29",
+      "time": "09:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-05-29",
+      "time": "10:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-05-29",
+      "time": "11:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-05-29",
+      "time": "13:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-29",
+      "time": "14:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-05-29",
+      "time": "15:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-06-01",
+      "time": "09:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-06-01",
+      "time": "10:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-06-01",
+      "time": "11:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-06-01",
+      "time": "13:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-06-01",
+      "time": "14:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-06-01",
+      "time": "15:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-06-02",
+      "time": "10:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-06-02",
+      "time": "11:00",
+      "doctor": "Dr. John"
+    },
+    {
+      "date": "2026-06-02",
+      "time": "13:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-06-02",
+      "time": "14:00",
+      "doctor": "Dr. Nguyen"
+    },
+    {
+      "date": "2026-06-02",
+      "time": "15:00",
+      "doctor": "Dr. Nguyen"
     }
   ]
 }
