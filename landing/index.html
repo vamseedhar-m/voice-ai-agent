@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mike — AI Voice Receptionist</title>
+  <title>Voice AI Agents — Portfolio by Vamsee</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
@@ -64,7 +64,7 @@
       align-items: center;
       text-align: center;
       padding: 100px 24px 80px;
-      max-width: 760px;
+      max-width: 800px;
       margin: 0 auto;
     }
     .hero-badge {
@@ -102,33 +102,96 @@
       font-weight: 300;
       color: var(--text-soft);
       line-height: 1.6;
-      max-width: 540px;
-      margin-bottom: 48px;
+      max-width: 580px;
+      margin-bottom: 56px;
     }
 
-    /* ── Audio player ── */
-    .player-card {
+    /* ── Agent tabs ── */
+    .agents-section {
       width: 100%;
-      max-width: 560px;
+      max-width: 640px;
+    }
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .tab-btn:hover { background: #e8e8ed; color: var(--text); }
+    .tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .tab-btn .tab-icon { font-size: 15px; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Agent card ── */
+    .agent-card {
       background: var(--bg-soft);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 28px 32px;
-      margin-bottom: 40px;
+    }
+    .agent-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .agent-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .avatar-health  { background: #e8f4fd; }
+    .avatar-hvac    { background: #fff3e0; }
+    .avatar-claims  { background: #e8f5e9; }
+
+    .agent-info .agent-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .agent-info .agent-company {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+    .agent-desc {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
     .player-label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
       color: var(--text-soft);
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-bottom: 16px;
-    }
-    .player-title {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
     audio {
       width: 100%;
@@ -139,7 +202,22 @@
     .player-note {
       font-size: 12px;
       color: var(--text-soft);
-      margin-top: 12px;
+      margin-top: 10px;
+    }
+    .capabilities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+    }
+    .cap-chip {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-soft);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 12px;
     }
 
     /* ── CTA ── */
@@ -148,6 +226,7 @@
       gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
+      margin-top: 36px;
     }
     .btn-primary {
       display: inline-flex;
@@ -229,16 +308,8 @@
       margin-bottom: 16px;
     }
     .step-icon { font-size: 28px; margin-bottom: 16px; }
-    .step h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .step p {
-      font-size: 14px;
-      color: var(--text-soft);
-      line-height: 1.6;
-    }
+    .step h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: var(--text-soft); line-height: 1.6; }
 
     /* ── Architecture ── */
     .arch-flow {
@@ -252,33 +323,14 @@
       border-radius: var(--radius);
       padding: 40px 32px;
     }
-    .arch-node {
-      text-align: center;
-      padding: 16px 20px;
-    }
+    .arch-node { text-align: center; padding: 16px 20px; }
     .arch-node .icon { font-size: 28px; margin-bottom: 8px; }
-    .arch-node .label {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-    }
-    .arch-node .sublabel {
-      font-size: 11px;
-      color: var(--text-soft);
-      margin-top: 2px;
-    }
-    .arch-arrow {
-      font-size: 18px;
-      color: var(--text-soft);
-      padding: 0 4px;
-    }
+    .arch-node .label { font-size: 13px; font-weight: 500; color: var(--text); }
+    .arch-node .sublabel { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
+    .arch-arrow { font-size: 18px; color: var(--text-soft); padding: 0 4px; }
 
     /* ── Tech stack ── */
-    .tech-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 12px; }
     .tech-chip {
       display: inline-flex;
       align-items: center;
@@ -320,7 +372,7 @@
 
   <!-- Nav -->
   <nav>
-    <a class="nav-brand" href="#">Mike ✦ AI Receptionist</a>
+    <a class="nav-brand" href="#">Voice AI Agents ✦</a>
     <div class="nav-links">
       <a href="#how-it-works">How it works</a>
       <a href="#architecture">Architecture</a>
@@ -331,30 +383,120 @@
   <!-- Hero -->
   <div class="hero">
     <div class="hero-badge">
-      <span>●</span> Live demo available
+      <span>●</span> Three live agents · one shared architecture
     </div>
-    <h1>Meet <em>Mike</em>,<br/>your AI receptionist</h1>
+    <h1>AI voice agents that<br/><em>handle real calls</em></h1>
     <p class="hero-sub">
-      A voice AI agent that handles real inbound calls — scheduling appointments,
-      verifying insurance, and knowing when to hand off to a human.
-      No app. No typing. Just call.
+      Three domain-specific voice agents — healthcare, HVAC, and insurance claims —
+      built on one shared architecture. No app. No typing. Just call.
     </p>
 
-    <!-- Audio Player -->
-    <div class="player-card">
-      <div class="player-label">Demo call recording</div>
-      <div class="player-title">Booking an appointment with Dr. John · ~2 min</div>
-      <audio controls>
-        <source src="healthbot-demo.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-      <p class="player-note">Real call recorded via Vapi · no actors · no edits</p>
+    <!-- Agent tabs -->
+    <div class="agents-section">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('health', this)">
+          <span class="tab-icon">🏥</span> HealthBot
+        </button>
+        <button class="tab-btn" onclick="switchTab('hvac', this)">
+          <span class="tab-icon">🔧</span> HVACBot
+        </button>
+        <button class="tab-btn" onclick="switchTab('claims', this)">
+          <span class="tab-icon">🛡️</span> ClaimsBot
+        </button>
+      </div>
+
+      <!-- HealthBot panel -->
+      <div class="tab-panel active" id="panel-health">
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-avatar avatar-health">👨‍⚕️</div>
+            <div class="agent-info">
+              <div class="agent-name">Mike — Sunrise Family Clinic</div>
+              <div class="agent-company">AI Receptionist · Books appointments · Verifies insurance</div>
+            </div>
+          </div>
+          <p class="agent-desc">
+            Mike answers inbound calls, collects patient info, checks doctor availability,
+            and books appointments — all in a single natural conversation.
+          </p>
+          <div class="player-label">Demo call recording</div>
+          <audio controls>
+            <source src="voice-ai-healthcare-demo.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+          <p class="player-note">Real call recorded via Vapi · no actors · no edits</p>
+          <div class="capabilities">
+            <span class="cap-chip">Appointment booking</span>
+            <span class="cap-chip">Insurance verification</span>
+            <span class="cap-chip">Doctor availability</span>
+            <span class="cap-chip">Human escalation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HVACBot panel -->
+      <div class="tab-panel" id="panel-hvac">
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-avatar avatar-hvac">🔧</div>
+            <div class="agent-info">
+              <div class="agent-name">Alex — Swift Fix HVAC</div>
+              <div class="agent-company">AI Dispatcher · Books service visits · Auto-assigns technicians</div>
+            </div>
+          </div>
+          <p class="agent-desc">
+            Alex takes service calls, collects the address and issue, finds an available
+            time window, and auto-assigns the right technician — no hold music required.
+          </p>
+          <div class="player-label">Demo call recording</div>
+          <audio controls>
+            <source src="voice-ai-hvac-demo.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+          <p class="player-note">Real call recorded via Vapi · no actors · no edits</p>
+          <div class="capabilities">
+            <span class="cap-chip">Service booking</span>
+            <span class="cap-chip">Technician dispatch</span>
+            <span class="cap-chip">Time window scheduling</span>
+            <span class="cap-chip">Request status lookup</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ClaimsBot panel -->
+      <div class="tab-panel" id="panel-claims">
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-avatar avatar-claims">🛡️</div>
+            <div class="agent-info">
+              <div class="agent-name">Jordan — Shield Insurance</div>
+              <div class="agent-company">AI Claims Assistant · Files claims · Instant approve/deny</div>
+            </div>
+          </div>
+          <p class="agent-desc">
+            Jordan guides callers through filing an insurance claim, compares the incident
+            against their policy, and delivers an instant approve, partial, or deny decision.
+          </p>
+          <div class="player-label">Demo call recording</div>
+          <audio controls>
+            <source src="voice-ai-insurance-demo.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+          <p class="player-note">Real call recorded via Vapi · no actors · no edits</p>
+          <div class="capabilities">
+            <span class="cap-chip">Claim intake</span>
+            <span class="cap-chip">Policy lookup</span>
+            <span class="cap-chip">Instant decision engine</span>
+            <span class="cap-chip">Claim status tracking</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- CTAs -->
     <div class="cta-group">
       <a class="btn-primary" href="tel:+14013527132">
-        📞 Call Mike live — +1 (401) 352-7132
+        📞 Call an agent — +1 (401) 352-7132
       </a>
       <a class="btn-secondary" href="https://github.com/vamseedhar-m/voice-ai-agent" target="_blank">
         ⌥ View on GitHub
@@ -369,7 +511,7 @@
     <div class="section-label">How it works</div>
     <h2 class="section-title">A full call, handled end-to-end</h2>
     <p class="section-sub">
-      From the moment you dial to the confirmation — Mike handles it autonomously,
+      From the moment you dial to the confirmation — each agent handles it autonomously,
       escalating to a human only when confidence drops below threshold.
     </p>
     <div class="steps">
@@ -389,7 +531,7 @@
         <div class="step-num">03</div>
         <div class="step-icon">🔧</div>
         <h3>Tools called</h3>
-        <p>Real tools check availability, book appointments, and verify insurance against live data.</p>
+        <p>Real tools check availability, book appointments, file claims, and verify policies against live data.</p>
       </div>
       <div class="step">
         <div class="step-num">04</div>
@@ -436,9 +578,9 @@
       </div>
       <div class="arch-arrow">→</div>
       <div class="arch-node">
-        <div class="icon">🗓️</div>
+        <div class="icon">🗄️</div>
         <div class="label">Tools</div>
-        <div class="sublabel">Calendar · CRM</div>
+        <div class="sublabel">Calendar · CRM · Claims</div>
       </div>
     </div>
   </section>
@@ -469,6 +611,19 @@
     <p>Built by <a href="https://github.com/vamseedhar-m" target="_blank">Vamsee</a> ·
     <a href="https://github.com/vamseedhar-m/voice-ai-agent" target="_blank">View source on GitHub</a></p>
   </footer>
+
+  <script>
+    function switchTab(name, btn) {
+      // Deactivate all tabs and panels
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      // Activate selected
+      btn.classList.add('active');
+      document.getElementById('panel-' + name).classList.add('active');
+      // Pause any playing audio in other panels
+      document.querySelectorAll('audio').forEach(a => { if (!a.paused) a.pause(); });
+    }
+  </script>
 
 </body>
 </html>
