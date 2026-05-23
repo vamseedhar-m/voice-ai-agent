@@ -231,7 +231,8 @@ def _handle_function_call(fn_name: str, params: dict, caller_phone: str) -> str:
 
     if fn_name == "book_appointment":
         patient = crm.get_patient_by_phone(caller_phone)
-        name = patient["name"] if patient else "Caller"
+        # Priority: name from conversation > name from CRM > fallback
+        name = params.get("patient_name") or (patient["name"] if patient else "Caller")
         try:
             appt = cal.book_appointment(
                 patient_name=name,
