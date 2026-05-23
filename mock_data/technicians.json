@@ -1,0 +1,45 @@
+{
+  "technicians": [
+    {
+      "id": "tech-001",
+      "name": "Carlos Rivera",
+      "specialties": ["AC repair", "AC installation", "refrigerant recharge"],
+      "zone": "north"
+    },
+    {
+      "id": "tech-002",
+      "name": "James Park",
+      "specialties": ["heating", "furnace repair", "heat pump"],
+      "zone": "south"
+    },
+    {
+      "id": "tech-003",
+      "name": "Maria Lopez",
+      "specialties": ["AC repair", "heating", "maintenance", "duct cleaning"],
+      "zone": "all"
+    }
+  ],
+  "available_slots": [
+    {"date": "2026-05-26", "window": "8am–12pm",  "technician_id": "tech-001"},
+    {"date": "2026-05-26", "window": "12pm–4pm",  "technician_id": "tech-003"},
+    {"date": "2026-05-27", "window": "8am–12pm",  "technician_id": "tech-002"},
+    {"date": "2026-05-27", "window": "10am–2pm",  "technician_id": "tech-003"},
+    {"date": "2026-05-28", "window": "8am–12pm",  "technician_id": "tech-001"},
+    {"date": "2026-05-28", "window": "10am–2pm",  "technician_id": "tech-003"},
+    {"date": "2026-05-29", "window": "8am–12pm",  "technician_id": "tech-002"},
+    {"date": "2026-05-29", "window": "12pm–4pm",  "technician_id": "tech-001"},
+    {"date": "2026-06-01", "window": "8am–12pm",  "technician_id": "tech-003"},
+    {"date": "2026-06-02", "window": "10am–2pm",  "technician_id": "tech-002"}
+  ],
+  "service_types": [
+    "AC repair",
+    "AC installation",
+    "heating repair",
+    "furnace repair",
+    "heat pump service",
+    "routine maintenance",
+    "duct cleaning",
+    "refrigerant recharge",
+    "thermostat installation"
+  ]
+}

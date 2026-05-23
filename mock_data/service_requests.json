@@ -1,0 +1,28 @@
+{
+  "service_requests": [
+    {
+      "id": "req-001",
+      "customer_name": "David Chen",
+      "phone": "+15550003333",
+      "address": "742 Evergreen Terrace, Springfield",
+      "service_type": "AC repair",
+      "date": "2026-05-26",
+      "window": "8am–12pm",
+      "technician_id": "tech-001",
+      "status": "confirmed",
+      "notes": "Unit not cooling below 78°F"
+    },
+    {
+      "id": "req-002",
+      "customer_name": "Sarah Johnson",
+      "phone": "+15550004444",
+      "address": "55 Oak Lane, Portland",
+      "service_type": "furnace repair",
+      "date": "2026-05-27",
+      "window": "10am–2pm",
+      "technician_id": "tech-003",
+      "status": "in-progress",
+      "notes": "Furnace making loud banging noise"
+    }
+  ]
+}

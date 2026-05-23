@@ -27,11 +27,12 @@ from app.models.intent import Intent
 from app.models.vapi import VapiMessageType, VapiWebhookPayload
 
 # ── Skin registry ────────────────────────────────────────────────────────────
-# Add HVACBot and ClaimsBot here when built.
 from app.skins import healthbot as _healthbot
+from app.skins import hvacbot as _hvacbot
 
 SKINS = {
     "healthbot": _healthbot,
+    "hvacbot":   _hvacbot,
 }
 
 ACTIVE_SKIN_NAME = os.getenv("ACTIVE_SKIN", "healthbot")
@@ -283,5 +284,21 @@ def _handle_function_call(fn_name: str, params: dict, caller_phone: str) -> str:
             return "No patient record found for this phone number."
         result = crm.verify_insurance(patient["id"])
         return json.dumps(result)
+
+    # ── HVACBot tools ─────────────────────────────────────────────────────────
+    if fn_name == "book_service":
+        from app.skins.hvacbot import book_service
+        return book_service(
+            customer_name=params.get("customer_name", "Customer"),
+            phone=caller_phone,
+            address=params.get("address", "Address not provided"),
+            service_type=params.get("service_type", "General service"),
+            date_str=params.get("date", ""),
+            window=params.get("window", ""),
+        )
+
+    if fn_name == "check_service_status":
+        from app.skins.hvacbot import check_service_status
+        return check_service_status(caller_phone)
 
     return f"Unknown function: {fn_name}"
