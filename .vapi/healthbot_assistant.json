@@ -1,0 +1,64 @@
+{
+  "_comment": "Paste this into Vapi dashboard → Assistants → Create Assistant → JSON editor. Update serverUrl to your actual public URL (ngrok or Railway).",
+  "name": "HealthBot",
+  "model": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-5",
+    "systemPrompt": "You are HealthBot, a friendly medical receptionist for Sunrise Family Clinic. Help patients schedule appointments, answer questions about their upcoming visits, and verify insurance coverage. Be empathetic, HIPAA-aware, and keep responses brief for phone delivery.",
+    "temperature": 0.3
+  },
+  "voice": {
+    "provider": "11labs",
+    "voiceId": "rachel"
+  },
+  "firstMessage": "Thank you for calling Sunrise Family Clinic. This is HealthBot. How can I help you today?",
+  "endCallMessage": "Thank you for calling. Have a wonderful day!",
+  "endCallPhrases": ["goodbye", "bye", "that's all", "thank you bye"],
+  "maxDurationSeconds": 180,
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-2",
+    "language": "en-US"
+  },
+  "serverUrl": "https://YOUR_PUBLIC_URL/vapi/webhook",
+  "functions": [
+    {
+      "name": "check_availability",
+      "description": "Check available appointment slots at Sunrise Family Clinic.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "The date to check in YYYY-MM-DD format. If the caller says 'tomorrow' or 'next Monday', convert it."
+          }
+        }
+      },
+      "serverUrl": "https://YOUR_PUBLIC_URL/vapi/webhook"
+    },
+    {
+      "name": "book_appointment",
+      "description": "Book a confirmed appointment for the caller.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "date": { "type": "string", "description": "YYYY-MM-DD" },
+          "time": { "type": "string", "description": "HH:MM (24h)" },
+          "doctor": { "type": "string", "description": "Doctor's name, e.g. Dr. Patel" },
+          "service": { "type": "string", "description": "Type of visit, e.g. Annual physical" }
+        },
+        "required": ["date", "time", "doctor"]
+      },
+      "serverUrl": "https://YOUR_PUBLIC_URL/vapi/webhook"
+    },
+    {
+      "name": "verify_insurance",
+      "description": "Check whether the caller's insurance is on file and verified.",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      },
+      "serverUrl": "https://YOUR_PUBLIC_URL/vapi/webhook"
+    }
+  ]
+}
