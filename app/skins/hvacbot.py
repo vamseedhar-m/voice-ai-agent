@@ -92,13 +92,21 @@ def get_available_slots(date_str: str | None = None) -> str:
         enriched.append({
             "date": s["date"],
             "day": day_name,
-            "window": s["window"],
+            "window": s["window"].replace("–", "-"),  # normalize for Claude
         })
 
     header = f"TODAY IS {today.strftime('%A %B %d %Y')}. Day reference: {ref}."
     if not enriched:
         return f"{header} No available slots for that date. Try another day."
     return f"{header} Available slots: {json.dumps(enriched)}"
+
+
+def _norm_window(w: str) -> str:
+    """Normalize window format — treat em dash and hyphen as the same.
+    e.g. '8am-12pm' and '8am–12pm' both become '8am-12pm'
+    Also handle spaces: '8am - 12pm' → '8am-12pm'
+    """
+    return w.replace("–", "-").replace("—", "-").replace(" - ", "-").replace(" ", "").lower()
 
 
 def book_service(
@@ -112,13 +120,20 @@ def book_service(
     """Book a service visit. Auto-assigns a technician."""
     data = _load_techs()
 
-    # Find a matching slot
+    # Find a matching slot — normalize both sides so dash variants match
     slot = next(
-        (s for s in data["available_slots"] if s["date"] == date_str and s["window"] == window),
+        (s for s in data["available_slots"]
+         if s["date"] == date_str and _norm_window(s["window"]) == _norm_window(window)),
         None,
     )
     if not slot:
-        return f"Sorry, the {window} window on {date_str} is no longer available. Let me find another time."
+        # Return available slots so Claude can offer alternatives
+        available = [
+            f"{s['day'] if 'day' in s else s['date']} {s['window']}"
+            for s in data["available_slots"][:3]
+        ]
+        options = ", ".join(available) if available else "no slots currently available"
+        return f"That window isn't available. Other options: {options}."
 
     # Remove the slot from availability
     data["available_slots"].remove(slot)
