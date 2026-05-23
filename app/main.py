@@ -234,11 +234,19 @@ def _handle_function_call(fn_name: str, params: dict, caller_phone: str) -> str:
         return f"Today is {today.strftime('%A, %B %d, %Y')}. Next 14 days: " + "; ".join(days)
 
     if fn_name == "check_availability":
-        from datetime import date as _date, datetime
-        slots = cal.get_available_slots(params.get("date"))
-        if not slots:
-            return "No available slots found for that date."
-        # Add human-readable day name to each slot so Claude never has to calculate it
+        from datetime import date as _date, timedelta, datetime
+        today = _date.today()
+
+        # Build 14-day reference so Claude always knows correct day→date mapping
+        ref = ", ".join(
+            f"{(today + timedelta(days=i)).strftime('%A')}={( today + timedelta(days=i)).strftime('%Y-%m-%d')}"
+            for i in range(14)
+        )
+
+        requested_date = params.get("date")
+        slots = cal.get_available_slots(requested_date)
+
+        # Add human-readable day name to each slot
         enriched = []
         for s in slots[:5]:
             try:
@@ -246,7 +254,11 @@ def _handle_function_call(fn_name: str, params: dict, caller_phone: str) -> str:
             except Exception:
                 day_name = s["date"]
             enriched.append({**s, "day": day_name})
-        return json.dumps(enriched)
+
+        header = f"TODAY IS {today.strftime('%A %B %d %Y')}. Day-to-date reference: {ref}."
+        if not enriched:
+            return f"{header} No available slots found for that date. Try another date."
+        return f"{header} Available slots: {json.dumps(enriched)}"
 
     if fn_name == "book_appointment":
         patient = crm.get_patient_by_phone(caller_phone)
